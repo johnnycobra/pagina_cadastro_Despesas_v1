@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Despesas</title>
+        <style>
+            body {
+                font-family: sans-serif;
+                margin: 0;
+                padding: 0;
+                background: #858585;
+            }
+
+            div.container {
+                margin: 0 auto;
+                width: 800px;
+                background: #6e6d6d;
+                padding: 20px;
+                box-shadow: 0 0 5px #999;
+            }
+
+            h1 {
+                text-align: center;
+                margin: 0;
+                padding: 0;
+            }
+
+            table {
+                width: 100%;
+            }
+
+            th, td {
+                padding: 10px;
+                border-bottom: #6e6c6c 1px solid;
+            }
+
+            input[type=text], select {
+                padding: 10px;
+                width: 100%;
+                font-size: 16px;
+            }
+
+            input[type=submit] {
+                font-size: 18px;
+                padding: 10px;
+                background: #00c;
+                color: #fff;
+                border: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Registro de Despesas</h1>
+            <form action="" method="post">
+                <label>Mês:</label>
+                <select name="mes">
+                    <option value="jan">Janeiro</option>
+                    <option value="fev">Fevereiro</option>
+                    <option value="mar">Março</option>
+                    <option value="abr">Abril</option>
+                    <option value="mai">Maio</option>
+                    <option value="jun">Junho</option>
+                    <option value="jul">Julho</option>
+                    <option value="ago">Agosto</option>
+                    <option value="set">Setembro</option>
+                    <option value="out">Outubro</option>
+                    <option value="nov">Novembro</option>
+                    <option value="dez">Dezembro</option>
+                </select>
+                <label>Descrição:</label>
+                <input type="text" name="descricao" placeholder="Descrição da Despesa">
+                <label>Valor:</label>
+                <input type="text" name="valor" placeholder="Valor da Despesa">
+                <input type="submit" value="Registrar" />
+            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mês</th>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+            <div class="total">
+                <span>Total: </span>
+                <span></span>
+            </div>
+        </div>
+        <script>
+            const form = document.querySelector('form');
+            const mes = document.querySelector('select[name=mes]');
+            const descricao = document.querySelector('input[name=descricao]');
+            const valor = document.querySelector('input[name=valor]');
+            const tabela = document.querySelector('table tbody');
+            const total = document.querySelector('.total span');
+
+            let totalDespesas = 0;
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const tr = document.createElement('tr');
+
+                const tdMes = document.createElement('td');
+                tdMes.textContent = mes.value;
+                tr.appendChild(tdMes);
+
+                const tdDescricao = document.createElement('td');
+                tdDescricao.textContent = descricao.value;
+                tr.appendChild(tdDescricao);
+
+                const tdValor = document.createElement('td');
+                tdValor.textContent = valor.value;
+                tr.appendChild(tdValor);
+
+                tabela.appendChild(tr);
+
+                totalDespesas += +valor.value;
+                total.textContent = totalDespesas;
+
+                descricao.value = '';
+                valor.value = '';
+            })
+        </script>
+    </body>
+</html>
